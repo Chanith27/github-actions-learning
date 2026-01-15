@@ -1,6 +1,15 @@
 const request = require('supertest');
 const app = require('../src/server');
 
+// Close server after all tests
+afterAll((done) => {
+  if (app.server) {
+    app.server.close(done);
+  } else {
+    done();
+  }
+});
+
 describe('GET /', () => {
   it('should return welcome message', async () => {
     const res = await request(app)
