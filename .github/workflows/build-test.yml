@@ -46,16 +46,7 @@ jobs:
           name: build-output
           path: output.txt
 
-  download-artifact:
-    name: Download Artifact
-    runs-on: ubuntu-latest
-    needs: build-and-test
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          name: build-output
-
-      - name: Read artifact content
-        run: cat output.txt
+          files: ./sample-app/coverage/coverage-final.json  
